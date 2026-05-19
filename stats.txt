@@ -1,0 +1,5 @@
+username=Player1
+highscore=1020
+currentchips=1000
+handsplayed=2
+handswon=1

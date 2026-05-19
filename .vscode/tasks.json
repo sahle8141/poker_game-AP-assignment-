@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1 - Compile Poker",
+      "type": "shell",
+      "command": "javac",
+      "args": [
+        "--module-path",
+        "${config:javafx.lib}",
+        "--add-modules",
+        "javafx.controls",
+        "-d",
+        "${workspaceFolder}\\out",
+        "--source-path",
+        "${workspaceFolder}\\src",
+        "${workspaceFolder}\\src\\poker\\ui\\PokerApp.java"
+      ],
+      "options": {
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/d", "/c"]
+        }
+      },
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "2 - Run Poker",
+      "type": "shell",
+      "command": "java",
+      "args": [
+        "--module-path",
+        "${config:javafx.lib}",
+        "--add-modules",
+        "javafx.controls",
+        "-cp",
+        "${workspaceFolder}\\out",
+        "poker.ui.PokerApp"
+      ],
+      "dependsOn": "1 - Compile Poker",
+      "options": {
+        "shell": {
+          "executable": "cmd.exe",
+          "args": ["/d", "/c"]
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+  ]
+}
