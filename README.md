@@ -1,7 +1,7 @@
-# Five-Card Draw Poker v2 — Modular, No Build Tools
 
-Modular rewrite of the original poker app. Same gameplay, same JavaFX UI —
-split into focused single-responsibility classes. No Maven, no Gradle.
+
+poker game made with java and javafx
+
 
 ---
 
