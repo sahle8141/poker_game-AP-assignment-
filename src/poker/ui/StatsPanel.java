@@ -5,9 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import poker.Player;
 
-/**
- * StatsPanel — right sidebar showing live session statistics.
- */
+
 public class StatsPanel extends VBox {
 
     private final Label handsLabel;

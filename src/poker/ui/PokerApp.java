@@ -8,32 +8,21 @@ import poker.*;
 
 import java.util.List;
 
-/**
- * PokerApp — main JavaFX Application.
- *
- * Responsibilities (only):
- *   • Assemble panels into a BorderPane
- *   • Wire button callbacks to GameEngine calls
- *   • Refresh panels after each state change
- *
- * All layout, styling, and animation live in the dedicated panel classes.
- */
+
 public class PokerApp extends Application implements ControlBar.ButtonActions {
 
     private static final int STARTING_CHIPS = 1000;
 
-    // ── Game layer ────────────────────────────────────────────────────────────
     private GameEngine engine;
     private Player     player;
 
-    // ── UI panels ─────────────────────────────────────────────────────────────
+
     private HeaderBar     headerBar;
     private GameArea      gameArea;
     private PaytablePanel paytablePanel;
     private StatsPanel    statsPanel;
     private ControlBar    controlBar;
 
-    // ── Application lifecycle ─────────────────────────────────────────────────
 
     @Override
     public void start(Stage stage) {
@@ -66,7 +55,6 @@ public class PokerApp extends Application implements ControlBar.ButtonActions {
         refreshAll();
     }
 
-    // ── ControlBar.ButtonActions ──────────────────────────────────────────────
 
     @Override
     public void onDeal() {
@@ -93,7 +81,7 @@ public class PokerApp extends Application implements ControlBar.ButtonActions {
         engine.draw(toReplace);
 
         gameArea.animateDraw(engine.getCurrentHand(), toReplace, () -> {
-            // Called after the last card animation lands
+
             gameArea.showResult(engine.getLastResult());
             paytablePanel.highlight(engine.getLastHandRank());
             controlBar.onResult();
@@ -119,16 +107,16 @@ public class PokerApp extends Application implements ControlBar.ButtonActions {
         refreshAll();
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
 
-    /** Push current player state to every panel that displays it. */
+
+
     private void refreshAll() {
         headerBar .refresh(player);
         statsPanel.refresh(player);
         controlBar.setMaxBet(player.getChips());
     }
 
-    // ── Entry point ───────────────────────────────────────────────────────────
+
 
     public static void main(String[] args) {
         launch(args);

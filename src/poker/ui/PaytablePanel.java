@@ -5,10 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import poker.Hand;
 
-/**
- * PaytablePanel — left sidebar listing all hand ranks and payouts.
- * Highlights the winning row after each hand.
- */
+
 public class PaytablePanel extends VBox {
 
     private static final String[][] ROWS = {
@@ -24,7 +21,7 @@ public class PaytablePanel extends VBox {
         {"High Card",          "—" },
     };
 
-    // tier 0 = HIGH_CARD → index 9, tier 9 = ROYAL_FLUSH → index 0
+
     private static final int[] TIER_TO_ROW = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
 
     private final Label[] nameLabels = new Label[ROWS.length];

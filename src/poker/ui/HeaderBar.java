@@ -5,9 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import poker.Player;
 
-/**
- * HeaderBar — top strip showing the game title, current chips, and high score.
- */
+
 public class HeaderBar extends HBox {
 
     private final Label chipsLabel;
@@ -28,7 +26,7 @@ public class HeaderBar extends HBox {
         getChildren().addAll(UiFactory.hSpacer(), title, UiFactory.hSpacer(), chipsLabel, highScoreLabel);
     }
 
-    /** Refresh both labels from the current player state. */
+
     public void refresh(Player player) {
         chipsLabel    .setText("Chips: " + player.getChips());
         highScoreLabel.setText("Best: "  + player.getHighScore());

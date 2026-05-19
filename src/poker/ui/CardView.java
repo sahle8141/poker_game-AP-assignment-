@@ -13,10 +13,7 @@ import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 import poker.Card;
 
-/**
- * JavaFX component representing one playing card.
- * Supports: face-up/face-down, selected (hold) toggle, flip animation.
- */
+
 public class CardView extends StackPane {
 
     private static final double CARD_W = 95;
@@ -24,10 +21,10 @@ public class CardView extends StackPane {
     private static final double RADIUS  = 10;
 
     private Card    card;
-    private boolean selected  = false;   // "hold" selection
+    private boolean selected  = false;   
     private boolean faceUp    = false;
 
-    // Layers
+    
     private final StackPane frontPane = new StackPane();
     private final StackPane backPane  = new StackPane();
     private final Label     holdLabel = new Label("HOLD");
@@ -44,7 +41,7 @@ public class CardView extends StackPane {
         setCursor(Cursor.DEFAULT);
     }
 
-    // ── Public API ────────────────────────────────────────────────────────────
+    
 
     public void setCard(Card card, boolean animate) {
         this.card   = card;
@@ -99,11 +96,11 @@ public class CardView extends StackPane {
         setTranslateY(0);
     }
 
-    // ── Build helpers ─────────────────────────────────────────────────────────
+
 
     private void buildBack() {
         Rectangle bg = roundRect(CARD_W, CARD_H, "#1a1a6e");
-        // Simple pattern using inner rectangle
+
         Rectangle inner = roundRect(CARD_W - 10, CARD_H - 10, "transparent");
         inner.setStroke(Color.web("#3a3aae", 0.5));
         inner.setStrokeWidth(1);
@@ -182,9 +179,7 @@ public class CardView extends StackPane {
         }
     }
 
-    // ── Flip animation ────────────────────────────────────────────────────────
-
-    private void flipIn() {
+   private void flipIn() {
         // Scale X from 0 → 1 (fold-in effect)
         ScaleTransition fold = new ScaleTransition(Duration.millis(120), this);
         fold.setFromX(1.0);
@@ -199,7 +194,7 @@ public class CardView extends StackPane {
         fold.play();
     }
 
-    // ── Util ──────────────────────────────────────────────────────────────────
+
 
     private Rectangle roundRect(double w, double h, String fill) {
         Rectangle r = new Rectangle(w, h);

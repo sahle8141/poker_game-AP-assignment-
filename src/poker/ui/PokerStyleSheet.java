@@ -1,10 +1,6 @@
 package poker.ui;
 
-/**
- * PokerStyleSheet — all CSS for the poker app in one place.
- * Returns a data-URI string safe to pass to scene.getStylesheets().add().
- * No JavaFX imports — pure string building.
- */
+
 public class PokerStyleSheet {
 
     private static final String CSS =

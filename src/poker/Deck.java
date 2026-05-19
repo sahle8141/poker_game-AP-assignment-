@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * A standard 52-card deck.
- * Supports shuffling and dealing single cards.
- */
+
 public class Deck {
 
     private final ArrayList<Card> cards;
@@ -17,7 +14,7 @@ public class Deck {
         reset();
     }
 
-    /** Re-populate and shuffle the deck. */
+    
     public void reset() {
         cards.clear();
         for (Card.Suit suit : Card.Suit.values()) {
@@ -28,7 +25,7 @@ public class Deck {
         Collections.shuffle(cards);
     }
 
-    /** Deal one card from the top of the deck. */
+    
     public Card deal() {
         if (cards.isEmpty()) {
             throw new IllegalStateException("Deck is empty — call reset() first.");

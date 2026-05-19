@@ -4,11 +4,7 @@ import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-/**
- * ControlBar — bottom strip with the bet slider and Deal / Draw / New Game buttons.
- * Exposes enable/disable helpers so PokerApp can drive the state machine
- * without reaching into individual controls.
- */
+
 public class ControlBar extends HBox {
 
     public interface ButtonActions {
@@ -31,7 +27,7 @@ public class ControlBar extends HBox {
                  "-fx-border-color:rgba(245,215,110,0.25);" +
                  "-fx-border-width:1 0 0 0;");
 
-        // Bet slider
+
         betSlider = new Slider(10, 200, 10);
         betSlider.setMajorTickUnit(50);
         betSlider.setBlockIncrement(10);
@@ -71,7 +67,7 @@ public class ControlBar extends HBox {
         );
     }
 
-    // ── State helpers called by PokerApp ──────────────────────────────────────
+
 
     public void onDealt() {
         dealButton .setDisable(true);
@@ -91,13 +87,12 @@ public class ControlBar extends HBox {
         betSlider  .setDisable(false);
     }
 
-    // ── Accessors ─────────────────────────────────────────────────────────────
 
     public int getCurrentBet() {
         return (int)(Math.round(betSlider.getValue() / 10.0) * 10);
     }
 
-    /** Cap the slider maximum to the player's available chips. */
+
     public void setMaxBet(int maxChips) {
         int cap = Math.max(10, Math.min(200, maxChips));
         betSlider.setMax(cap);

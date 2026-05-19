@@ -1,9 +1,6 @@
 package poker;
 
-/**
- * Immutable value object representing a single playing card.
- * Suit and Rank are enums for type-safety and easy comparison.
- */
+
 public class Card {
 
     public enum Suit {

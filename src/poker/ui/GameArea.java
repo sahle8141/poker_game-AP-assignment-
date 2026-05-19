@@ -7,11 +7,7 @@ import javafx.scene.layout.*;
 import javafx.util.Duration;
 import poker.Hand;
 
-/**
- * GameArea — the centre panel.
- * Owns the five CardViews, the result label, and the instruction line.
- * All animation logic for dealing and drawing lives here.
- */
+
 public class GameArea extends VBox {
 
     private final CardView[] cardViews = new CardView[5];
@@ -41,9 +37,7 @@ public class GameArea extends VBox {
         getChildren().addAll(resultLabel, cardsRow, instructionLabel);
     }
 
-    // ── Card animations ───────────────────────────────────────────────────────
 
-    /** Animate dealing all 5 cards from the given hand. */
     public void animateDeal(poker.Hand hand, Runnable onComplete) {
         resetCards();
         for (int i = 0; i < 5; i++) {
@@ -63,7 +57,7 @@ public class GameArea extends VBox {
         }
     }
 
-    /** Animate only the replaced cards; call onComplete when last card lands. */
+
     public void animateDraw(poker.Hand hand, java.util.List<Integer> replaced, Runnable onComplete) {
         for (CardView cv : cardViews) cv.setSelectable(false);
 
@@ -80,9 +74,9 @@ public class GameArea extends VBox {
         done.play();
     }
 
-    // ── Result display ────────────────────────────────────────────────────────
 
-    /** Show the hand result with a pulse animation. */
+
+
     public void showResult(String message) {
         resultLabel.setStyle("-fx-font-family:'Georgia'; -fx-font-size:22px;" +
                              "-fx-font-weight:bold; -fx-text-fill:#f5d76e;" +
@@ -95,7 +89,7 @@ public class GameArea extends VBox {
         pulse.play();
     }
 
-    /** Show a temporary flash message (positive = green, false = red). */
+ 
     public void showFlash(String message, boolean positive) {
         resultLabel.setStyle("-fx-font-family:'Georgia'; -fx-font-size:15px;" +
                              "-fx-font-weight:bold; -fx-text-fill:" +
@@ -115,9 +109,9 @@ public class GameArea extends VBox {
     public void clearResult()                     { resultLabel.setText(""); }
     public void setInstruction(String text)       { instructionLabel.setText(text); }
 
-    // ── Card hold query ───────────────────────────────────────────────────────
+ 
 
-    /** Returns the list of card indices that are NOT held (i.e. to be replaced). */
+ 
     public java.util.List<Integer> getIndicesToReplace() {
         java.util.List<Integer> list = new java.util.ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -126,7 +120,6 @@ public class GameArea extends VBox {
         return list;
     }
 
-    // ── Reset ─────────────────────────────────────────────────────────────────
 
     public void resetCards() {
         for (CardView cv : cardViews) {

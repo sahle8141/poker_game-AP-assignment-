@@ -3,10 +3,7 @@ package poker;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Holds exactly 5 cards and evaluates the poker hand rank.
- * Hand evaluation is fully self-contained — no UI coupling.
- */
+
 public class Hand {
 
     public enum HandRank {
@@ -40,7 +37,7 @@ public class Hand {
         cards = new ArrayList<>(HAND_SIZE);
     }
 
-    /** Add a card to the hand (up to HAND_SIZE). */
+    
     public void addCard(Card card) {
         if (cards.size() >= HAND_SIZE) {
             throw new IllegalStateException("Hand is already full.");
@@ -48,7 +45,7 @@ public class Hand {
         cards.add(card);
     }
 
-    /** Replace a card at a specific index with a new card. */
+    
     public void replaceCard(int index, Card newCard) {
         if (index < 0 || index >= cards.size()) {
             throw new IndexOutOfBoundsException("Invalid card index: " + index);
@@ -59,18 +56,16 @@ public class Hand {
     public Card getCard(int index) { return cards.get(index); }
     public int  size()             { return cards.size();     }
 
-    /** Full copy of the card list (defensive). */
+    
     public List<Card> getCards() { return Collections.unmodifiableList(cards); }
 
-    // ── Hand Evaluation ───────────────────────────────────────────────────────
 
-    /** Evaluate and return the best HandRank for these 5 cards. */
     public HandRank evaluate() {
         boolean flush    = isFlush();
         boolean straight = isStraight();
 
         if (flush && straight) {
-            // Check for Royal Flush (10-J-Q-K-A of same suit)
+
             List<Integer> values = getSortedValues();
             if (values.get(0) == 10) return HandRank.ROYAL_FLUSH;
             return HandRank.STRAIGHT_FLUSH;
@@ -85,7 +80,6 @@ public class Hand {
         return HandRank.HIGH_CARD;
     }
 
-    // ── Private helpers ───────────────────────────────────────────────────────
 
     private List<Integer> getSortedValues() {
         return cards.stream()
@@ -94,7 +88,7 @@ public class Hand {
                     .collect(Collectors.toList());
     }
 
-    /** Map from rank-value → count of cards with that rank. */
+
     private Map<Integer, Long> getRankCounts() {
         return cards.stream()
                     .collect(Collectors.groupingBy(
@@ -109,11 +103,10 @@ public class Hand {
 
     private boolean isStraight() {
         List<Integer> values = getSortedValues();
-        // Normal straight
+
         for (int i = 1; i < values.size(); i++) {
             if (values.get(i) - values.get(i - 1) != 1) {
-                // Special case: Ace-low straight (A-2-3-4-5)
-                // values sorted: [2,3,4,5,14]
+
                 return values.equals(Arrays.asList(2, 3, 4, 5, 14));
             }
         }
@@ -144,7 +137,7 @@ public class Hand {
         return getRankCounts().values().stream().anyMatch(c -> c == 4);
     }
 
-    /** Payout multiplier for the given hand rank (for betting logic in GameEngine). */
+
     public static int getPayoutMultiplier(HandRank rank) {
         return switch (rank) {
             case ROYAL_FLUSH    -> 250;

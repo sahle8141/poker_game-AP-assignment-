@@ -37,63 +37,49 @@ poker-v2/
 
 ---
 
-## Module Responsibilities
+### Logic layer
 
-### Logic layer (no JavaFX)
-| Class | Does |
-|---|---|
-| `Card` | Value object — Suit/Rank enums, immutable |
-| `Deck` | Shuffle + deal from ArrayList |
-| `Hand` | Evaluate all 9 hand ranks via Java Streams |
-| `Player` | Chip balance, high score, win counters |
-| `GameEngine` | IDLE → DEALT → RESULT state machine |
-| `StatsManager` | Read/write stats.txt in key=value format |
+| Class          | Does                                       |
+| -------------- | ------------------------------------------ |
+| `Card`         | Value object — Suit/Rank enums, immutable  |
+| `Deck`         | Shuffle + deal from ArrayList              |
+| `Hand`         | Evaluate all 9 hand ranks via Java Streams |
+| `Player`       | Chip balance, high score, win counters     |
+| `GameEngine`   | IDLE → DEALT → RESULT state machine        |
+| `StatsManager` | Read/write stats.txt in key=value format   |
 
 ### UI layer (JavaFX)
-| Class | Does |
-|---|---|
-| `PokerApp` | Assembles panels, wires callbacks, calls `refreshAll()` |
-| `CardView` | Face-up/down card, HOLD toggle, flip animation |
-| `HeaderBar` | Title + chip/high-score labels |
-| `GameArea` | Card row, deal/draw animations, result + flash messages |
-| `PaytablePanel` | Paytable rows, highlights winning rank |
-| `StatsPanel` | Hands played, win rate |
-| `ControlBar` | Bet slider, Deal/Draw/New Game buttons, enable/disable state |
-| `UiFactory` | Shared factory: buttons, labels, spacers, felt background |
-| `PokerStyleSheet` | All CSS in one string, returned as a data-URI |
 
-### What changed from v1
-The original `PokerApp.java` was ~470 lines doing layout, animation, styling,
-event handling, and stat refresh all in one class. v2 splits it:
-
-- `PokerApp` drops to ~80 lines — pure orchestration
-- Each panel owns its own layout and state transitions
-- `UiFactory` eliminates repeated inline style strings
-- `PokerStyleSheet` makes theming a single-file change
-- `ControlBar` exposes `onDealt()` / `onResult()` / `onReset()` so `PokerApp`
-  never touches individual buttons directly
+| Class             | Does                                                         |
+| ----------------- | ------------------------------------------------------------ |
+| `PokerApp`        | Assembles panels, wires callbacks, calls `refreshAll()`      |
+| `CardView`        | Face-up/down card, HOLD toggle, flip animation               |
+| `HeaderBar`       | Title + chip/high-score labels                               |
+| `GameArea`        | Card row, deal/draw animations, result + flash messages      |
+| `PaytablePanel`   | Paytable rows, highlights winning rank                       |
+| `StatsPanel`      | Hands played, win rate                                       |
+| `ControlBar`      | Bet slider, Deal/Draw/New Game buttons, enable/disable state |
+| `UiFactory`       | Shared factory: buttons, labels, spacers, felt background    |
+| `PokerStyleSheet` | All CSS in one string, returned as a data-URI                |
 
 ---
 
 ## How to Run
 
 ### Requirements
-- **JDK 17+** — https://adoptium.net
-- **JavaFX SDK 17+** — https://gluonhq.com/products/javafx/
 
-### Linux / macOS
-```bash
-export JAVAFX_HOME=/path/to/javafx-sdk-21/lib
-chmod +x run.sh && ./run.sh
-```
+- **JDK 17+**
+- **JavaFX SDK 17+**
 
-### Windows
+###
+
 ```bat
 set JAVAFX_HOME=C:\javafx-sdk-21\lib
 run.bat
 ```
 
 ### VS Code
+
 1. Open this folder in VS Code
 2. Edit `.vscode/settings.json` → set `"javafx.lib"` to your SDK's `lib` path
 3. Press **Ctrl+Shift+B** → choose **2 – Run Poker**
@@ -111,15 +97,16 @@ run.bat
 7. **NEW GAME** — resets the round; going broke refills to 1000 chips
 
 ## Paytable
-| Hand | Payout |
-|---|---|
-| Royal Flush | 250× |
-| Straight Flush | 50× |
-| Four of a Kind | 25× |
-| Full House | 9× |
-| Flush | 6× |
-| Straight | 4× |
-| Three of a Kind | 3× |
-| Two Pair | 2× |
-| One Pair | 1× |
-| High Card | — |
+
+| Hand            | Payout |
+| --------------- | ------ |
+| Royal Flush     | 250×   |
+| Straight Flush  | 50×    |
+| Four of a Kind  | 25×    |
+| Full House      | 9×     |
+| Flush           | 6×     |
+| Straight        | 4×     |
+| Three of a Kind | 3×     |
+| Two Pair        | 2×     |
+| One Pair        | 1×     |
+| High Card       | —      |

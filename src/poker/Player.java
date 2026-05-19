@@ -1,9 +1,6 @@
 package poker;
 
-/**
- * Represents a player: holds their name, chip balance, and high-score.
- * Pure data model — no UI or file I/O here.
- */
+
 public class Player {
 
     private final String name;
@@ -20,7 +17,6 @@ public class Player {
         this.totalHandsWon    = 0;
     }
 
-    // ── Chip management ───────────────────────────────────────────────────────
 
     public void placeBet(int amount) {
         if (amount > chips) throw new IllegalArgumentException("Insufficient chips.");
@@ -37,7 +33,7 @@ public class Player {
         if (won) totalHandsWon++;
     }
 
-    // ── Getters / Setters ─────────────────────────────────────────────────────
+
 
     public String getName()           { return name;             }
     public int    getChips()          { return chips;            }
@@ -45,7 +41,7 @@ public class Player {
     public int    getTotalHandsPlayed() { return totalHandsPlayed; }
     public int    getTotalHandsWon()    { return totalHandsWon;    }
 
-    /** Called when loading from persistence to restore state. */
+
     public void setChips(int chips) {
         this.chips = chips;
         if (chips > highScore) highScore = chips;

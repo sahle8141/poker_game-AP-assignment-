@@ -5,16 +5,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 
-/**
- * UiFactory — shared factory methods for styled widgets.
- * Keeps button/label style definitions in one place so every panel
- * uses the same look without duplicating inline CSS strings.
- */
+
 public class UiFactory {
 
-    // ── Buttons ───────────────────────────────────────────────────────────────
 
-    /** A full-size poker action button with hover effect. */
     public static Button actionButton(String text, String bgColor, String hoverColor) {
         Button btn = new Button(text);
         String base  = buttonStyle(bgColor);
@@ -32,8 +26,6 @@ public class UiFactory {
                "-fx-background-radius:6; -fx-cursor:hand;" +
                "-fx-effect:dropshadow(gaussian,rgba(0,0,0,0.4),4,0,1,2);";
     }
-
-    // ── Labels ────────────────────────────────────────────────────────────────
 
     public static Label headerLabel(String text) {
         Label l = new Label(text);
@@ -78,18 +70,16 @@ public class UiFactory {
         return l;
     }
 
-    // ── Layout helpers ────────────────────────────────────────────────────────
 
-    /** An HBox spacer that grows to fill available width. */
+
+
     public static Region hSpacer() {
         Region r = new Region();
         HBox.setHgrow(r, Priority.ALWAYS);
         return r;
     }
 
-    // ── Backgrounds ───────────────────────────────────────────────────────────
-
-    public static Background feltBackground() {
+  public static Background feltBackground() {
         return new Background(new BackgroundFill(
             new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE,
                 new Stop(0, Color.web("#0d4f1c")),

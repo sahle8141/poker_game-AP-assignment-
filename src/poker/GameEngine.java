@@ -3,14 +3,7 @@ package poker;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * GameEngine — all poker game logic, zero JavaFX references.
- *
- * State machine:
- *   IDLE → BETTING → DEALT → DRAWING → RESULT → IDLE
- *
- * The JavaFX UI calls these methods and reads the resulting state.
- */
+
 public class GameEngine {
 
     public enum GameState { IDLE, BETTING, DEALT, DRAWING, RESULT }
@@ -36,12 +29,7 @@ public class GameEngine {
         statsManager.load(player);
     }
 
-    // ── Public API (called by UI) ─────────────────────────────────────────────
 
-    /**
-     * Begin a new hand: place the bet and deal 5 cards.
-     * @param betAmount chips wagered (must be >= ANTE)
-     */
     public void deal(int betAmount) {
         assertState(GameState.IDLE);
         if (betAmount < ANTE)         throw new IllegalArgumentException("Minimum bet is " + ANTE + " chips.");
@@ -59,10 +47,6 @@ public class GameEngine {
         state = GameState.DEALT;
     }
 
-    /**
-     * Draw phase: replace the cards at the given indices (0-4) with new cards.
-     * Pass an empty list to "stand pat" (keep all cards).
-     */
     public void draw(List<Integer> indicesToReplace) {
         assertState(GameState.DEALT);
         state = GameState.DRAWING;
@@ -75,7 +59,6 @@ public class GameEngine {
         state = GameState.RESULT;
     }
 
-    /** Reset the game to IDLE, ready for a new hand. */
     public void reset() {
         state       = GameState.IDLE;
         currentHand = null;
@@ -83,12 +66,12 @@ public class GameEngine {
         lastHandRank = null;
     }
 
-    /** Save current player stats to the text file. */
+
     public void saveStats() {
         statsManager.save(player);
     }
 
-    // ── Accessors ─────────────────────────────────────────────────────────────
+
 
     public GameState     getState()        { return state;        }
     public Hand          getCurrentHand()  { return currentHand;  }
@@ -99,7 +82,7 @@ public class GameEngine {
     public int           getAnte()         { return ANTE;         }
     public StatsManager  getStatsManager() { return statsManager; }
 
-    // ── Private helpers ───────────────────────────────────────────────────────
+
 
     private void evaluateResult() {
         lastHandRank = currentHand.evaluate();
@@ -118,7 +101,7 @@ public class GameEngine {
                          + "  (No payout)";
         }
 
-        statsManager.save(player); // auto-save after each hand
+        statsManager.save(player); 
     }
 
     private void assertState(GameState expected) {
